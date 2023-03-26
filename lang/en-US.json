@@ -1,0 +1,7 @@
+{
+    "components.todo.list.empty": "No todos found",
+    "components.todo.list.title": "List of todos",
+    "components.todo.list.total_completed": "Completed todos: {completed}/{total}",
+    "pages.health.status.label": "Status",
+    "pages.health.timestamp.label": "Verified at"
+}

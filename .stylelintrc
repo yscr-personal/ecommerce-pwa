@@ -1,0 +1,38 @@
+{
+    "processors": [
+        "stylelint-processor-styled-components"
+    ],
+    "extends": [
+        "stylelint-config-standard",
+        "stylelint-config-styled-components"
+    ],
+    "rules": {
+        "property-no-vendor-prefix": null,
+        "declaration-empty-line-before": null,
+        "declaration-colon-newline-after": null,
+        "value-list-max-empty-lines": null,
+        "value-no-vendor-prefix": null,
+        "comment-empty-line-before": null,
+        "font-family-no-missing-generic-family-keyword": null,
+        "selector-type-case": null,
+        "selector-type-no-unknown": null,
+        "no-duplicate-selectors": null,
+        "no-descending-specificity": null,
+        "rule-empty-line-before": null,
+        "declaration-block-semicolon-newline-after": null,
+        "declaration-property-value-disallowed-list": {
+            "font-size": [
+                "/^([0-9]*)(px)/"
+            ]
+        },
+        "value-keyword-case": [
+            "lower",
+            {
+                "ignoreKeywords": [
+                    "dummyValue"
+                ]
+            }
+        ]
+    },
+    "syntax": "scss"
+}

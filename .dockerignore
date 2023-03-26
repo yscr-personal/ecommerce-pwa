@@ -1,0 +1,32 @@
+# Git
+.git
+.gitignore
+.gitattributes
+.github
+
+# VSCode
+.vscode
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Next.js
+.env
+
+# Vault
+vault
+
+# Documentation
+README.md
+CHANGELOG.md
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
+SECURITY.md
+
+# Reports
+.reports/
+
+# Example files
+public/*.example.*

@@ -1,0 +1,13 @@
+{
+  "components.products.products-list.sort_by": "Ordenar por:",
+  "components.products.products-list.sort_by_name": "Nome",
+  "components.products.products-list.sort_by_price_asc": "Menor preço",
+  "components.products.products-list.sort_by_price_desc": "Maior preço",
+  "components.products.products-list.sort_by_rating": "Média de avaliações",
+  "components.products.products-list.total-products": "{initPageIndex}-{endPageIndex} de {total} resultados",
+  "components.todo.list.empty": "No momento não há tarefas cadastradas.",
+  "components.todo.list.next_page": "Próxima página",
+  "components.todo.list.previous_page": "Página anterior",
+  "components.todo.list.title": "Lista de tarefas",
+  "components.todo.list.total_completed": "Tarefas completas: {completed}/{total}"
+}
