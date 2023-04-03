@@ -1,7 +1,11 @@
 import AuthLayout from '@/components/layout/auth';
+import { fetchProfileAction } from '@/components/user/slice/actions/fetch-profile';
+import { loginAction } from '@/components/user/slice/actions/login';
+import { useAppDispatch } from '@/store';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
-import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import { FieldValues, useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 function ErrorMessage({ message }: { message?: any }) {
@@ -15,6 +19,9 @@ function ErrorMessage({ message }: { message?: any }) {
 }
 
 export default function LoginPage() {
+  const dispatch = useAppDispatch();
+  const { replace } = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -32,12 +39,25 @@ export default function LoginPage() {
     ),
   });
 
+  async function onSubmit(data: FieldValues) {
+    const result = await dispatch(
+      loginAction({
+        email: data.email,
+        password: data.password,
+      }),
+    );
+
+    if (loginAction.fulfilled.match(result)) {
+      dispatch(fetchProfileAction()).then(() => replace('/'));
+    }
+  }
+
   return (
     <AuthLayout>
       <div className="flex w-full flex-col items-center justify-center space-y-4 p-3">
         <form
           className="flex w-full max-w-lg flex-col space-y-4 rounded-lg border border-black p-10"
-          onSubmit={handleSubmit((d) => console.log(d))}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <section className="flex flex-col">
             <h1 className="self-start text-3xl font-bold">Fazer login</h1>

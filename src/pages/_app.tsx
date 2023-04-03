@@ -1,8 +1,13 @@
+import DynamicLoading from '@/components/loading/dynamic';
 import Localized from '@/components/localized';
+import { persistor, wrapper } from '@/store';
 import '@/styles/globals.css';
 import { AppProps } from 'next/app';
-import { useState } from 'react';
-import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
+import { Provider } from 'react-redux';
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { PersistGate } from 'redux-persist/integration/react';
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
@@ -13,19 +18,20 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export default function App({ Component, pageProps }: AppProps) {
-  const [queryClient] = useState(() => new QueryClient()) 
-
+export default function App({ Component, ...rest }: AppProps) {
+  const { store, props } = wrapper.useWrappedStore(rest);
+  const { pageProps } = props;
   return (
     <>
-      <GlobalStyle />
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
+      <Provider store={store}>
+        <GlobalStyle />
+        <PersistGate persistor={persistor} loading={<DynamicLoading />}>
           <Localized>
             <Component {...pageProps} />
           </Localized>
-        </Hydrate>
-      </QueryClientProvider>
+        </PersistGate>
+        <ToastContainer />
+      </Provider>
     </>
   );
 }

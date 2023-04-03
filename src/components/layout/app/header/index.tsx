@@ -1,14 +1,24 @@
-import Cart from '@/components/cart';
+import CartIcon from '@/components/cart/cart-icon';
+import { fetchCategoriesAction } from '@/components/categories/slice/actions/fetch-categories';
+import ProfileMenuIcon from '@/components/profile/profile-menu-icon';
 import SearchBar from '@/components/search-bar';
+import { useAppDispatch } from '@/store';
 import Image from 'next/image';
 import Link from 'next/link';
 import Router from 'next/router';
+import { useEffect } from 'react';
 
 type Props = {
   isLogged: boolean;
 };
 
 export default function Header({ isLogged }: Props) {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCategoriesAction());
+  }, [dispatch]);
+
   return (
     <header className="flex flex-col bg-gray-800 p-2 text-white">
       <div className="flex h-16 flex-row items-center justify-between">
@@ -25,7 +35,8 @@ export default function Header({ isLogged }: Props) {
           <SearchBar />
         </div>
         <div className="flex flex-row items-center justify-between space-x-5">
-          <Cart />
+          {isLogged && <ProfileMenuIcon />}
+          <CartIcon />
           <Link
             href={isLogged ? '/auth/logout' : '/auth/login'}
             className={`rounded ${

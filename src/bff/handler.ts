@@ -5,8 +5,8 @@ export interface RequestError extends Error {
   response?: any;
 }
 
-export function onSuccess<T>(res: Response, data?: T) {
-  logger.info(`[CX-TRACKING] Response: ${data}`);
+export function onSuccess<T>(req: Request, res: Response, data?: T) {
+  logger.info(`[BFF-handler] Response from [${req.method}] ${req.url}`);
   return res.status(res.statusCode).json(data);
 }
 
@@ -25,6 +25,11 @@ export function onError(
     errorCode,
     errors: [error.message],
   };
-  logger.error(`[CX-TRACKING] An Error occurred: ${error} - ${errorInfo}`);
+  logger.error(
+    {
+      errorInfo,
+    },
+    `[BFF-Handler] An Error occurred: ${error.message}`,
+  );
   return res.status(error.response?.status || 500).json(errorInfo);
 }

@@ -1,34 +1,32 @@
 import Select from '@/components/select';
+import { useAppDispatch, useAppSelector } from '@/store';
 import { useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
-import { useCategories } from '../categories/request';
+import { selectCategories } from '../categories/slice/categories-selectors';
 import { useDebounce } from '../hooks/use-debounce';
-import { useFilter } from '../hooks/use-filter';
-import { Product } from '../products/interfaces/product';
-import { PRODUCTS_QUERY_KEY } from '../products/request';
-import bffRequest from '../requests/bff-request';
+import { fetchProductsAction } from '../products/slice/actions/fetch-products';
 
 export default function SearchBar() {
-  const { data: categories } = useCategories();
+  const dispatch = useAppDispatch();
+  const categories = useAppSelector(selectCategories);
 
   const [selectedCategory, setSelectedCategory] = useState('');
   const [search, setSearch] = useState('');
   const debouncedSearch = useDebounce(search, 500);
-  const { mutate } = useFilter<Product>({
-    mutateFn: () =>
-      bffRequest(
-        `products?${new URLSearchParams({
-          title: debouncedSearch,
-          categoryId: selectedCategory,
-        }).toString()}`,
-      ),
-    queryKey: PRODUCTS_QUERY_KEY,
-  });
+
+  function filterProducts() {
+    dispatch(
+      fetchProductsAction({
+        title: debouncedSearch,
+        categoryId: selectedCategory,
+      }),
+    );
+  }
 
   return (
     <div className="flex flex-row text-sm text-gray-700">
       <Select
-        className="h-10 cursor-pointer rounded-l-md border-r-2 bg-gray-100 p-2 outline-none max-w-sm"
+        className="h-10 max-w-sm cursor-pointer rounded-l-md border-r-2 bg-gray-100 p-2 outline-none"
         options={
           categories?.map((category) => ({
             label: category.name,
@@ -45,20 +43,20 @@ export default function SearchBar() {
         onChange={setSelectedCategory}
       />
       <input
-        className="h-10 w-full appearance-none bg-white px-3 outline-none rounded-none"
+        className="h-10 w-full appearance-none rounded-none bg-white px-3 outline-none"
         type="search"
         name="search-products"
         placeholder="Search"
         onChange={(e) => setSearch(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
-            mutate();
+            filterProducts();
           }
         }}
       />
       <button
         className="h-10 rounded-r-md bg-purple-400 p-3 hover:bg-purple-500"
-        onClick={() => mutate()}
+        onClick={() => filterProducts()}
       >
         <FaSearch size={18} />
       </button>
