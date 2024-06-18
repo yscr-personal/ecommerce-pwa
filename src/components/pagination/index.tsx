@@ -7,7 +7,7 @@ type Props = {
   totalPages: number;
 };
 
-export default function Pagination({ page, setPage, totalPages }: Props) {
+export default function Pagination({ page, setPage, totalPages }: Readonly<Props>) {
   const array = Array.from({ length: totalPages }, (_, i) => (
     <Button key={i} onClick={() => setPage(i + 1)} disabled={page === i + 1}>
       {i + 1}

@@ -7,7 +7,7 @@ type Props = PropsWithChildren<{}>;
 
 const DEFAULT_LOCALE = 'pt-BR';
 
-export default function Localized({ children }: Props) {
+export default function Localized({ children }: Readonly<Props>) {
   const [locale, setLocale] = useState(DEFAULT_LOCALE);
 
   useEffect(() => {

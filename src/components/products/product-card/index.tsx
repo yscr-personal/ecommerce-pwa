@@ -8,7 +8,7 @@ type Props = {
   product: Product;
 };
 
-export default function ProductCard({ product }: Props) {
+export default function ProductCard({ product }: Readonly<Props>) {
   const intl = useIntl();
 
   return (

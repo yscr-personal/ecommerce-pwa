@@ -14,7 +14,7 @@ type Props = {
   products: Product[];
 };
 
-export default function ProductsList({ products }: Props) {
+export default function ProductsList({ products }: Readonly<Props>) {
   const intl = useIntl();
 
   const { sortedData, setSort, sort } = useSorted({

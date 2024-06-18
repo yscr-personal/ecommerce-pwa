@@ -12,7 +12,7 @@ type Props = {
   isLogged: boolean;
 };
 
-export default function Header({ isLogged }: Props) {
+export default function Header({ isLogged }: Readonly<Props>) {
   const dispatch = useAppDispatch();
 
   useEffect(() => {

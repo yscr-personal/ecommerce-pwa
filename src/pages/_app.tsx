@@ -22,16 +22,14 @@ export default function App({ Component, ...rest }: AppProps) {
   const { store, props } = wrapper.useWrappedStore(rest);
   const { pageProps } = props;
   return (
-    <>
-      <Provider store={store}>
-        <GlobalStyle />
-        <PersistGate persistor={persistor} loading={<DynamicLoading />}>
-          <Localized>
-            <Component {...pageProps} />
-          </Localized>
-        </PersistGate>
-        <ToastContainer />
-      </Provider>
-    </>
+    <Provider store={store}>
+      <GlobalStyle />
+      <PersistGate persistor={persistor} loading={<DynamicLoading />}>
+        <Localized>
+          <Component {...pageProps} />
+        </Localized>
+      </PersistGate>
+      <ToastContainer />
+    </Provider>
   );
 }

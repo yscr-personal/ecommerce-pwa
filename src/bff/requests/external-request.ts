@@ -2,7 +2,7 @@ import { logger } from "@/utils/logger";
 
 export async function externalRequest(url: string, options: any = {}) {
   const { method, body } = options;
-  const headers = options.headers || {};
+  const headers = options.headers ?? {};
 
   logger.info(`[BFF] external api called: [${method}] ${url}`);
 

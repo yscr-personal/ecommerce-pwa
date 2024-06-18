@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 import Footer from './footer';
 import Header from './header';
 
-export default function AuthLayout({ children }: PropsWithChildren) {
+export default function AuthLayout({ children }: Readonly<PropsWithChildren>) {
   return (
     <div className="tracking-wide">
       <Header />

@@ -16,7 +16,7 @@ export function usePagination<T>({ data, perPage = 10 }: PaginationProps<T>) {
   const end = start + perPage;
 
   return {
-    paginatedData: data?.slice(start, end) || [],
+    paginatedData: data?.slice(start, end) ?? [],
     currentPage,
     setCurrentPage,
     totalPages,

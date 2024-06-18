@@ -5,7 +5,7 @@ type Props<T> = {
   perPage: number;
 };
 
-export default function useLazyLoad<T>({ data, perPage }: Props<T>) {
+export default function useLazyLoad<T>({ data, perPage }: Readonly<Props<T>>) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const start = (currentPage - 1) * perPage;
@@ -16,7 +16,7 @@ export default function useLazyLoad<T>({ data, perPage }: Props<T>) {
   }, [data, end]);
 
   return {
-    lazyData: data?.slice(0, end) || [],
+    lazyData: data?.slice(0, end) ?? [],
     hasMore,
     setCurrentPage,
   };

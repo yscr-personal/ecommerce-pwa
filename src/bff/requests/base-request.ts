@@ -16,7 +16,7 @@ const request =
     const optionsHeaders = options.headers ?? {};
 
     const defaultOptions = {
-      method: method || reqMethod,
+      method: method ?? reqMethod,
       credentials: 'omit',
       ...options,
       headers: {
@@ -27,7 +27,7 @@ const request =
     };
 
     return await externalRequest(`${domain}/${url}`, {
-      body: body || null,
+      body: body ?? null,
       ...defaultOptions,
     });
   };

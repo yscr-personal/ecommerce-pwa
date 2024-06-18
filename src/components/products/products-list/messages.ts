@@ -23,6 +23,6 @@ export default defineMessages({
   },
   sort_by: {
     id: 'components.products.products-list.sort_by',
-    defaultMessage: 'Ordenar por:',
+    defaultMessage: 'Ordenar por',
   },
 });

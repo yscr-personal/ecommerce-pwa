@@ -19,7 +19,7 @@ export function onError(
 ) {
   const errorInfo = {
     url: req.url,
-    user: req.headers['remote-user'] || 'No user',
+    user: req.headers['remote-user'] ?? 'No user',
     frontMessage,
     stack: error.stack,
     errorCode,
@@ -31,5 +31,5 @@ export function onError(
     },
     `[BFF-Handler] An Error occurred: ${error.message}`,
   );
-  return res.status(error.response?.status || 500).json(errorInfo);
+  return res.status(error.response?.status ?? 500).json(errorInfo);
 }

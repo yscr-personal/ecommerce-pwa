@@ -4,7 +4,7 @@ import { PropsWithChildren } from 'react';
 import Footer from './footer';
 import Header from './header';
 
-export default function AppLayout({ children }: PropsWithChildren) {
+export default function AppLayout({ children }: Readonly<PropsWithChildren>) {
   const userToken = useAppSelector(selectUserToken);
 
   return (

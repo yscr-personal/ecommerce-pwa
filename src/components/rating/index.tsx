@@ -3,7 +3,7 @@ type Props = {
   total?: number;
 };
 
-export default function Rating({ mean, total }: Props) {
+export default function Rating({ mean, total }: Readonly<Props>) {
   return (
     <div className="flex items-center">
       <svg

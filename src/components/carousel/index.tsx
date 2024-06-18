@@ -6,7 +6,7 @@ type Props = {
   data: string[];
 };
 
-export default function Carousel({ data }: Props) {
+export default function Carousel({ data }: Readonly<Props>) {
   const size = useResponsive();
 
   return (

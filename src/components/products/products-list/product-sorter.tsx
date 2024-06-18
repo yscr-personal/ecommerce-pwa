@@ -7,12 +7,12 @@ type Props = {
   value: string;
 };
 
-export default function ProductsSorterSelect({ onChange, value }: Props) {
+export default function ProductsSorterSelect({ onChange, value }: Readonly<Props>) {
   const intl = useIntl();
   return (
     <div className="flex h-10 w-full flex-row items-center justify-end text-sm lg:w-auto">
-      <span className="mr-2">{intl.formatMessage(messages.sort_by)}</span>
       <Select
+        label={intl.formatMessage(messages.sort_by)}
         className="cursor-pointer rounded-lg border bg-gray-100 p-2 outline-none"
         onChange={onChange}
         value={value}
